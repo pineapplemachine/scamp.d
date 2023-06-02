@@ -21,6 +21,7 @@ else version(Posix) {
 else version(Windows) {
     import core.sys.windows.winbase : QueryPerformanceCounter;
     import core.sys.windows.winbase : QueryPerformanceFrequency;
+    import core.sys.windows.winnt : LARGE_INTEGER;
 }
 
 /// Helper to convert a number of ticks to a number of nanoseconds.
@@ -71,19 +72,21 @@ else version(Windows) long monotonic_ns() {
     static long ticks_per_second = 0;
     // Initialize ticks_per_second if it hasn't been initialized already
     if(ticks_per_second == 0){
-        const freq_status = QueryPerformanceFrequency(&ticks_per_second);
-        if(freq_status == 0 || ticks_per_second <= 0){
+        LARGE_INTEGER ticks_per_second_int;
+        const freq_status = QueryPerformanceFrequency(&ticks_per_second_int);
+        if(freq_status == 0 || ticks_per_second_int.QuadPart <= 0){
             assert(false, "Monotonic clock not available for this platform.");
         }
+        ticks_per_second = ticks_per_second_int.QuadPart;
     }
     // Get the number of ticks
-    long ticks;
+    LARGE_INTEGER ticks;
     const status = QueryPerformanceCounter(&ticks);
     // Note that if this check would fail, then the one just above should
     // have failed already.
     assert(status != 0, "Monotonic clock not available for this platform.");
     // Convert the number of ticks to a number of nanoseconds
-    return ticks_to_ns(ticks, ticks_per_second);
+    return ticks_to_ns(ticks.QuadPart, ticks_per_second);
 }
 
 /// Test coverage for monotonic_ns
