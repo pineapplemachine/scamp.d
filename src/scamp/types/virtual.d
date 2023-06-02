@@ -4,7 +4,6 @@ private:
 
 import scamp.meta.func : FunctionParameterTypes;
 import scamp.meta.func : FunctionReturnType;
-import scamp.meta.pointer : PointerTargetType;
 import scamp.text.write_int : write_int;
 import scamp.types.delegate_type : Delegate;
 
