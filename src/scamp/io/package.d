@@ -1,5 +1,5 @@
 module scamp.io;
 
-public nothrow @safe @nogc:
+public:
 
 import scamp.io.stdio;
