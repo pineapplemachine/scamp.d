@@ -1,0 +1,38 @@
+{
+    "name": "scamp",
+    "version": "0.1.0",
+    "authors": ["Sophie Kirschner"],
+    "homepage": "https://github.com/pineapplemachine/scamp.d",
+    "description": "Library for the D programming language.",
+    "copyright": "Copyright © 2023, Sophie Kirschner",
+    "license": "MIT",
+    "buildRequirements": ["allowWarnings"],
+    "buildOptions": ["betterC"],
+    "sourcePaths": ["src"],
+    "importPaths": ["./src"],
+    "targetType": "library",
+    "targetPath": "lib",
+    "targetName": "scamp",
+    "excludedSourceFiles": [
+        "**/test.d",
+        "**/wip_*.d",
+        "**/old_*.d",
+        "**/reject_*.d",
+        "**/sdl/**",
+        "**/range2/**",
+        "**/json/test/**",
+        "**/testrandom.d"
+    ],
+    "configurations": [
+        {
+            "name": "lib",
+            "targetType": "library"
+        },
+        {
+            "name": "test-collections",
+            "targetType": "library",
+            "buildOptions": ["unittests"],
+            "sourcePaths": ["src/collections"]
+        }
+    ]
+}

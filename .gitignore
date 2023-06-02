@@ -22,3 +22,7 @@ docs/
 
 # Code coverage
 *.lst
+
+# This repo
+lib/
+**/bin/**
