@@ -72,12 +72,12 @@ else version(Windows) long monotonic_ns() {
     static long ticks_per_second = 0;
     // Initialize ticks_per_second if it hasn't been initialized already
     if(ticks_per_second == 0){
-        LARGE_INTEGER ticks_per_second_int;
-        const freq_status = QueryPerformanceFrequency(&ticks_per_second_int);
-        if(freq_status == 0 || ticks_per_second_int.QuadPart <= 0){
+        LARGE_INTEGER frequency;
+        const freq_status = QueryPerformanceFrequency(&frequency);
+        if(freq_status == 0 || frequency.QuadPart <= 0){
             assert(false, "Monotonic clock not available for this platform.");
         }
-        ticks_per_second = ticks_per_second_int.QuadPart;
+        ticks_per_second = frequency.QuadPart;
     }
     // Get the number of ticks
     LARGE_INTEGER ticks;
