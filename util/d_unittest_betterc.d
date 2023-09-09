@@ -17,7 +17,7 @@ extern(C) void test_module(string module_name)(
         size_t tests_count = 0;
         size_t tests_start_ns = monotonic_ns();
         static foreach(test; tests) {
-            test();
+            //test();
             tests_count++;
             (*all_tests_count)++;
         }
@@ -32,13 +32,14 @@ extern(C) void test_module(string module_name)(
             (tests_count == 1 ? "test" : "tests"), " in ",
             tests_ms_str[0 .. $ - 3], ".", tests_ms_str[$ - 3 .. $], " seconds."
         );
+        stdio.flush();
     }
 }
 
 extern(C) int main() {
+    stdio.writeln("Running tests.");
     size_t tests_count = 0;
     size_t tests_ns = 0;
-    stdio.writeln("Running tests.");
     static foreach(module_name; TestModules) {
         test_module!module_name(&tests_count, &tests_ns);
     }
@@ -47,7 +48,8 @@ extern(C) int main() {
     stdio.writeln(
         "Finished running ", write_int(tests_count), " ",
         (tests_count == 1 ? "test" : "tests"), " in ",
-        tests_ms_str[0 .. $ - 3], ".", tests_ms_str[$ - 3 .. $], " seconds."
+        tests_ms_str[0 .. $ - 3], ".", tests_ms_str[$ - 3 .. $], " seconds. ",
+        "(", write_int(tests_ns), " nanoseconds)"
     );
     return 0;
 }

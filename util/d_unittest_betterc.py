@@ -1,4 +1,21 @@
-# import textwrap
+"""
+
+This is a Python script which can be used to generate a D source file
+which will run unittest blocks within modules, then compile and run this
+file.
+
+Usage:
+
+Test whole package:
+python util\d_unittest_betterc.py src/scamp
+
+Test only files ending in "map.d":
+python util\d_unittest_betterc.py src/scamp */map.d
+
+Test files ending in "map.d" and their imported dependencies, recursively:
+python util\d_unittest_betterc.py src/scamp */map.d --deps scamp.*
+
+"""
 
 import argparse
 import fnmatch
