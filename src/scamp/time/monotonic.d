@@ -69,7 +69,7 @@ else version(Posix) long monotonic_ns() {
 else version(Windows) long monotonic_ns() {
     // https://msdn.microsoft.com/en-us/library/ms644904(v=VS.85).aspx
     // https://msdn.microsoft.com/en-us/library/ms644905(v=VS.85).aspx
-    static long ticks_per_second = 0;
+    static shared long ticks_per_second = 0;
     // Initialize ticks_per_second if it hasn't been initialized already
     if(ticks_per_second == 0){
         LARGE_INTEGER frequency;
