@@ -13,12 +13,12 @@ bool ok()
 void[] alloc(size_t size)
 void[] realloc(void[] buffer, size_t size)
 void free(void[] buffer)
-void reset()
 ```
 
 They may also commonly implement these methods:
 
 ```
+void reset()
 void[] alloc_align(size_t size, size_t alignment)
 void[] realloc_align(void[] buffer, size_t size, size_t alignment)
 bool owns(void[] buffer)
@@ -108,6 +108,7 @@ static assert(void.sizeof == 1);
 
 import scamp.alloc.block;
 import scamp.alloc.block_typed;
+import scamp.alloc.malloc;
 import scamp.alloc.scratch;
 import scamp.alloc.scratch_dynamic;
 import scamp.alloc.stack;
