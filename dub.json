@@ -7,7 +7,7 @@
     "copyright": "Copyright © 2023, Sophie Kirschner",
     "license": "MIT",
     "buildRequirements": ["allowWarnings"],
-    "buildOptions": ["betterC"],
+    "_buildOptions": ["betterC"],
     "sourcePaths": ["src"],
     "importPaths": ["./src"],
     "targetType": "library",
